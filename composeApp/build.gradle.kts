@@ -65,12 +65,14 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(compose.materialIconsExtended)
             implementation(libs.multiplatform.markdown.renderer)
             implementation(libs.mikepenz.multiplatform.markdown.renderer.m3)
             implementation(libs.multiplatform.markdown.renderer.coil3)
             implementation(libs.coil.svg)
             implementation(libs.coil.network.ktor)
             implementation(libs.ktor.client.core)
+            implementation(libs.material3.window.size.multiplatform)
         }
     }
 }
@@ -106,6 +108,10 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    compose.resources {
+        publicResClass = true
+        generateResClass = always
     }
     dynamicFeatures += setOf(":instantSite")
     dependencies {
