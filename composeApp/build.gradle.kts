@@ -97,6 +97,7 @@ android {
     buildFeatures {
         compose = true
     }
+    dynamicFeatures += setOf(":instantSite")
     dependencies {
         debugImplementation(compose.uiTooling)
     }
