@@ -1,3 +1,4 @@
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -20,31 +21,33 @@ import core.presenter.theme.HarutiroSiteKMPTheme
 @Preview
 fun App() {
     HarutiroSiteKMPTheme {
-        val windowSizeClass = calculateWindowSizeClass()
+        SelectionContainer{
+            val windowSizeClass = calculateWindowSizeClass()
 
-        val navigationType = when (windowSizeClass.widthSizeClass) {
-            WindowWidthSizeClass.Compact -> ReplyNavigationType.BOTTOM_NAVIGATION
-            WindowWidthSizeClass.Medium -> ReplyNavigationType.NAVIGATION_RAIL
-            WindowWidthSizeClass.Expanded -> ReplyNavigationType.NAVIGATION_RAIL
-            else -> ReplyNavigationType.BOTTOM_NAVIGATION
-        }
-
-        if (navigationType == ReplyNavigationType.BOTTOM_NAVIGATION) {
-            RootNavigationBottomBar{
-                when(it){
-                    Page.HOME -> HomeMarkdown()
-                    Page.HISTORY -> HistoryPage()
-                    Page.PORTFOLIO -> PortfolioPage()
-                    Page.POSTS -> PostsPage()
-                }
+            val navigationType = when (windowSizeClass.widthSizeClass) {
+                WindowWidthSizeClass.Compact -> ReplyNavigationType.BOTTOM_NAVIGATION
+                WindowWidthSizeClass.Medium -> ReplyNavigationType.NAVIGATION_RAIL
+                WindowWidthSizeClass.Expanded -> ReplyNavigationType.NAVIGATION_RAIL
+                else -> ReplyNavigationType.BOTTOM_NAVIGATION
             }
-        }else if(navigationType == ReplyNavigationType.NAVIGATION_RAIL){
-            RootNavigationRail{
-                when(it){
-                    Page.HOME -> HomeMarkdown()
-                    Page.HISTORY -> HistoryPage()
-                    Page.PORTFOLIO -> PortfolioPage()
-                    Page.POSTS -> PostsPage()
+
+            if (navigationType == ReplyNavigationType.BOTTOM_NAVIGATION) {
+                RootNavigationBottomBar{
+                    when(it){
+                        Page.HOME -> HomeMarkdown()
+                        Page.HISTORY -> HistoryPage()
+                        Page.PORTFOLIO -> PortfolioPage()
+                        Page.POSTS -> PostsPage()
+                    }
+                }
+            }else if(navigationType == ReplyNavigationType.NAVIGATION_RAIL){
+                RootNavigationRail{
+                    when(it){
+                        Page.HOME -> HomeMarkdown()
+                        Page.HISTORY -> HistoryPage()
+                        Page.PORTFOLIO -> PortfolioPage()
+                        Page.POSTS -> PostsPage()
+                    }
                 }
             }
         }
