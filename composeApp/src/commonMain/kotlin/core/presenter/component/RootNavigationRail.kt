@@ -16,7 +16,7 @@ import core.entity.Page
 fun RootNavigationRail(
     content: @Composable (selectedItem: Page) -> Unit = {}
 ) {
-    var selectedItem by remember { mutableStateOf(Page.HOME) }
+    var selectedItem by remember { mutableStateOf(Page.HISTORY) }
     val pages = Page.entries.toTypedArray()
     Row {
         NavigationRail {

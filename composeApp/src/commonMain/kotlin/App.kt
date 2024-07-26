@@ -5,6 +5,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.*
 import core.entity.Page
+import core.entity.REPLY_NAVIGATION_TYPE
 import core.entity.ReplyNavigationType
 import core.presenter.component.RootNavigationBottomBar
 import core.presenter.component.RootNavigationRail
@@ -24,14 +25,14 @@ fun App() {
         SelectionContainer{
             val windowSizeClass = calculateWindowSizeClass()
 
-            val navigationType = when (windowSizeClass.widthSizeClass) {
+            REPLY_NAVIGATION_TYPE.value = when (windowSizeClass.widthSizeClass) {
                 WindowWidthSizeClass.Compact -> ReplyNavigationType.BOTTOM_NAVIGATION
                 WindowWidthSizeClass.Medium -> ReplyNavigationType.NAVIGATION_RAIL
                 WindowWidthSizeClass.Expanded -> ReplyNavigationType.NAVIGATION_RAIL
                 else -> ReplyNavigationType.BOTTOM_NAVIGATION
             }
 
-            if (navigationType == ReplyNavigationType.BOTTOM_NAVIGATION) {
+            if (REPLY_NAVIGATION_TYPE.value == ReplyNavigationType.BOTTOM_NAVIGATION) {
                 RootNavigationBottomBar{
                     when(it){
                         Page.HOME -> HomeMarkdown()
@@ -40,7 +41,7 @@ fun App() {
                         Page.POSTS -> PostsPage()
                     }
                 }
-            }else if(navigationType == ReplyNavigationType.NAVIGATION_RAIL){
+            }else if(REPLY_NAVIGATION_TYPE.value == ReplyNavigationType.NAVIGATION_RAIL){
                 RootNavigationRail{
                     when(it){
                         Page.HOME -> HomeMarkdown()
