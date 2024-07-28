@@ -28,6 +28,17 @@ kotlin {
         }
         binaries.executable()
     }
+
+    js {
+        moduleName = "app"
+        binaries.executable()
+        browser {
+            useCommonJs()
+            commonWebpackConfig {
+                outputFileName = "$moduleName.js"
+            }
+        }
+    }
     
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)

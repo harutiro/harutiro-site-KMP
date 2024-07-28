@@ -27,7 +27,7 @@ fun App() {
 
             REPLY_NAVIGATION_TYPE.value = when (windowSizeClass.widthSizeClass) {
                 WindowWidthSizeClass.Compact -> ReplyNavigationType.BOTTOM_NAVIGATION
-                WindowWidthSizeClass.Medium -> ReplyNavigationType.NAVIGATION_RAIL
+                WindowWidthSizeClass.Medium -> ReplyNavigationType.BOTTOM_NAVIGATION
                 WindowWidthSizeClass.Expanded -> ReplyNavigationType.NAVIGATION_RAIL
                 else -> ReplyNavigationType.BOTTOM_NAVIGATION
             }
