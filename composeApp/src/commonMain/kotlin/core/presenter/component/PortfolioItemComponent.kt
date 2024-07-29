@@ -62,6 +62,11 @@ fun PortfolioItemComponent(
 
             Text(
                 modifier = modifier,
+                text = portfolioItem.date
+            )
+
+            Text(
+                modifier = modifier,
                 text = portfolioItem.description
             )
 
