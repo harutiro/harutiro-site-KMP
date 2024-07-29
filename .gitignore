@@ -18,3 +18,4 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 !*/composeApp/build/dist/wasmJs/productionExecutable/
+!*/composeApp/build/dist/js/productionExecutable/
