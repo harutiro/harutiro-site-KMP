@@ -1,6 +1,7 @@
 package core.presenter.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -34,9 +36,6 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
-
-
-
 @Composable
 fun HistoryItemComponent(
     historyItem: HistoryItem,
@@ -44,16 +43,30 @@ fun HistoryItemComponent(
     val modifier = Modifier
         .padding(4.dp)
 
-    if(REPLY_NAVIGATION_TYPE.value == ReplyNavigationType.BOTTOM_NAVIGATION){
-        HistoryPhoneComponent(
-            modifier = modifier,
-            historyItem = historyItem
-        )
-    }else{
-        HistoryPCComponent(
-            modifier = modifier,
-            historyItem = historyItem
-        )
+    val uriHandler = LocalUriHandler.current
+
+    Column (
+        modifier = Modifier
+            .clickable(
+                enabled = historyItem.link.isNullOrBlank().not()
+            ){
+                uriHandler.openUri(historyItem.link.toString())
+            }
+            .fillMaxWidth()
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ){
+        if(REPLY_NAVIGATION_TYPE.value == ReplyNavigationType.BOTTOM_NAVIGATION){
+            HistoryPhoneComponent(
+                modifier = modifier,
+                historyItem = historyItem
+            )
+        }else{
+            HistoryPCComponent(
+                modifier = modifier,
+                historyItem = historyItem
+            )
+        }
     }
 }
 
