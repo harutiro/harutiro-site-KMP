@@ -21,6 +21,10 @@ import core.presenter.theme.HarutiroSiteKMPTheme
 @Composable
 @Preview
 fun App() {
+
+    getPlatform()
+    println(getPlatform().name)
+
     HarutiroSiteKMPTheme {
         SelectionContainer{
             val windowSizeClass = calculateWindowSizeClass()
@@ -33,14 +37,7 @@ fun App() {
             }
 
             if (REPLY_NAVIGATION_TYPE.value == ReplyNavigationType.BOTTOM_NAVIGATION) {
-                RootNavigationBottomBar{
-                    when(it){
-                        Page.HOME -> HomeMarkdown()
-                        Page.HISTORY -> HistoryPage()
-                        Page.PORTFOLIO -> PortfolioPage()
-                        Page.POSTS -> PostsPage()
-                    }
-                }
+                RootNavigationBottomBar()
             }else if(REPLY_NAVIGATION_TYPE.value == ReplyNavigationType.NAVIGATION_RAIL){
                 RootNavigationRail{
                     when(it){

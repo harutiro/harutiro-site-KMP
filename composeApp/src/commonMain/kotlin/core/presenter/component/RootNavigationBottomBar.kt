@@ -14,13 +14,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import core.entity.Page
+import core.presenter.pages.history.HistoryPage
+import core.presenter.pages.home.HomeMarkdown
+import core.presenter.pages.portfolio.PortfolioPage
+import core.presenter.pages.posts.PostsPage
 
 @Composable
-fun RootNavigationBottomBar(
-    content: @Composable (selectedItem: Page) -> Unit = {}
-) {
+fun RootNavigationBottomBar() {
     var selectedItem by remember { mutableStateOf(Page.HOME) }
+    val navController = rememberNavController()
     val pages = Page.entries.toTypedArray()
 
     Scaffold(
@@ -37,12 +43,25 @@ fun RootNavigationBottomBar(
             }
         }
     ) { innerPadding ->
-        Column(
+        NavHost(
+            navController = navController,
+            startDestination = selectedItem.path,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            content(selectedItem)
+            composable(Page.HOME.path) {
+                HomeMarkdown()
+            }
+            composable(Page.HISTORY.path) {
+                HistoryPage()
+            }
+            composable(Page.PORTFOLIO.path) {
+                PortfolioPage()
+            }
+            composable(Page.POSTS.path) {
+                PostsPage()
+            }
         }
     }
 }
